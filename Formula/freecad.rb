@@ -62,6 +62,9 @@ class Freecad < Formula
       ENV["CXX"] = Formula["llvm"].opt_bin/"clang++"
     end
 
+    # Disable function which are not available for Apple Silicon
+    act = Hardware::CPU.arm? ? 'OFF' : 'ON'
+
     args = std_cmake_args + %W[
       -DBUILD_QT5=ON
       -DUSE_PYTHON3=1
@@ -72,6 +75,7 @@ class Freecad < Formula
       -DBUILD_FEM_NETGEN=1
       -DBUILD_FEM=1
       -DBUILD_FEM_NETGEN:BOOL=ON
+      -DBUILD_WEB=#{act}
       -DFREECAD_USE_EXTERNAL_KDL=ON
       -DCMAKE_BUILD_TYPE=#{build.with?("debug") ? "Debug" : "Release"}
     ]

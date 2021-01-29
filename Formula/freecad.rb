@@ -52,9 +52,7 @@ class Freecad < Formula
   end
 
   def install
-    if !File.exist?('/usr/local/lib/python3.9/site-packages/six.py')
-      system "pip3", "install", "six"
-    end
+    system "pip3", "install", "six" unless File.exist?("#{HOMEBREW_PREFIX}/lib/python3.9/site-packages/six.py")
 
     # NOTE: brew clang compilers req, Xcode nowork on macOS 10.13 or 10.14
     if MacOS.version <= :mojave
@@ -98,9 +96,7 @@ class Freecad < Formula
   end
 
   def post_install
-    if !File.exist?("/usr/local/lib/python3.9/site-packages/six.py")
-      system "pip3", "install", "six"
-    end
+    system "pip3", "install", "six" unless File.exist?("#{HOMEBREW_PREFIX}/lib/python3.9/site-packages/six.py")
     bin.install_symlink "../MacOS/FreeCAD" => "FreeCAD"
     bin.install_symlink "../MacOS/FreeCADCmd" => "FreeCADCmd"
     if !File.exist?("/usr/local/Cellar/freecad/0.19pre/lib/python3.9/site-packages/homebrew-freecad-bundle.pth")

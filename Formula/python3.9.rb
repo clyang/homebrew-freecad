@@ -1,10 +1,10 @@
 class Python39 < Formula
   desc "Interpreted, interactive, object-oriented programming language"
   homepage "https://www.python.org/"
-  url "https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tar.xz"
-  sha256 "9c73e63c99855709b9be0b3cc9e5b072cb60f37311e8c4e50f15576a0bf82854"
+  url "https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tar.xz"
+  sha256 "991c3f8ac97992f3d308fefeb03a64db462574eadbff34ce8bc5bb583d9903ff"
   license "Python-2.0"
-  revision 5
+  revision 6
 
   livecheck do
     url "https://www.python.org/ftp/python/"
@@ -56,20 +56,37 @@ class Python39 < Formula
   link_overwrite "Frameworks/Python.framework/Versions/Current"
 
   resource "setuptools" do
-    url "https://files.pythonhosted.org/packages/a7/e0/30642b9c2df516506d40b563b0cbd080c49c6b3f11a70b4c7a670f13a78b/setuptools-50.3.2.zip"
-    sha256 "ed0519d27a243843b05d82a5e9d01b0b083d9934eaa3d02779a23da18077bd3c"
+    url "https://files.pythonhosted.org/packages/94/23/e9e3d96500c063129a19feb854efbb01e6ffe7d913f1da8176692418ab8e/setuptools-51.1.1.tar.gz"
+    sha256 "0b43d1e0e0ac1467185581c2ceaf86b5c1a1bc408f8f6407687b0856302d1850"
   end
 
   resource "pip" do
-    url "https://files.pythonhosted.org/packages/cb/5f/ae1eb8bda1cde4952bd12e468ab8a254c345a0189402bf1421457577f4f3/pip-20.3.1.tar.gz"
-    sha256 "43f7d3811f05db95809d39515a5111dd05994965d870178a4fe10d5482f9d2e2"
+    url "https://files.pythonhosted.org/packages/ca/1e/d91d7aae44d00cd5001957a1473e4e4b7d1d0f072d1af7c34b5899c9ccdf/pip-20.3.3.tar.gz"
+    sha256 "79c1ac8a9dccbec8752761cb5a2df833224263ca661477a2a9ed03ddf4e0e3ba"
   end
 
   resource "wheel" do
-    url "https://files.pythonhosted.org/packages/d4/cf/732e05dce1e37b63d54d1836160b6e24fb36eeff2313e93315ad047c7d90/wheel-0.36.1.tar.gz"
-    sha256 "aaef9b8c36db72f8bf7f1e54f85f875c4d466819940863ca0b3f3f77f0a1646f"
+    url "https://files.pythonhosted.org/packages/ed/46/e298a50dde405e1c202e316fa6a3015ff9288423661d7ea5e8f22f589071/wheel-0.36.2.tar.gz"
+    sha256 "e11eefd162658ea59a60a0f6c7d493a7190ea4b9a85e335b33489d9f17e0245e"
   end
 
+  # Remove this block when upstream adds arm64 and Big Sur compatibility
+  if MacOS.version >= :big_sur
+    # Upstream PRs #20171, #21114, #21224 and #21249
+    # Backport of https://github.com/python/cpython/pull/22855
+    patch do
+      url "https://raw.githubusercontent.com/Homebrew/formula-patches/33a9d63f/python/arm64-3.9.patch"
+      sha256 "167e328cf68e9ec142f483fda9fafbb903be9a47dee2826614fdc24b2fbe6e06"
+    end
+
+    # Further patch for Big Sur, remove in 3.9.2
+    # https://github.com/python/cpython/pull/23556
+    patch do
+      url "https://github.com/fxcoudert/cpython/commit/6511bf56.patch?full_index=1"
+      sha256 "3a34fea8a133305bc337d67acfacc36dc8f9d47a808dd592f5b0cd8c9c9384d2"
+    end
+  end
+  
   # Remove this block when upstream adds arm64 and Big Sur compatibility
   if MacOS.version >= :big_sur
     # Upstream PRs #20171, #21114, #21224 and #21249

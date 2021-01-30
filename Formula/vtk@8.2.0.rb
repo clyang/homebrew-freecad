@@ -90,7 +90,7 @@ class VtkAT820 < Formula
               Formula["hdf5"].prefix.realpath,
               Formula["hdf5"].opt_prefix
     # get rid of bad include paths on 10.14+
-    if MacOS.version >= :mojave
+    if MacOS.version >= :mojave and not Hardware::CPU.arm?
       inreplace Dir["#{lib}/cmake/vtk-*/Modules/vtklibxml2.cmake"], %r{;/Library/Developer/CommandLineTools[^"]*}, ""
       inreplace Dir["#{lib}/cmake/vtk-*/Modules/vtkexpat.cmake"], %r{;/Library/Developer/CommandLineTools[^"]*}, ""
       inreplace Dir["#{lib}/cmake/vtk-*/Modules/vtkzlib.cmake"], %r{;/Library/Developer/CommandLineTools[^"]*}, ""

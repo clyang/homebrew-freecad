@@ -26,8 +26,11 @@ class Freecad < Formula
   depends_on "#@tap/coin@4.0.0"
   depends_on "#@tap/matplotlib"
   depends_on "#@tap/med-file"
-  depends_on "#@tap/nglib"
-  depends_on "#@tap/opencamlib"
+  # Temporarily fixes for Apple Silicon
+  unless Hardware::CPU.arm?
+    depends_on "#@tap/nglib"
+    depends_on "#@tap/opencamlib"
+  end
   depends_on "#@tap/pivy"
   depends_on "#@tap/pyside2"
   depends_on "#@tap/pyside2-tools"
@@ -70,10 +73,11 @@ class Freecad < Formula
       -std=c++14
       -DCMAKE_CXX_STANDARD=14
       -DBUILD_ENABLE_CXX_STD:STRING=C++14
-      -DBUILD_FEM_NETGEN=1
-      -DBUILD_FEM=1
-      -DBUILD_FEM_NETGEN:BOOL=ON
+      -DBUILD_FEM_NETGEN=#{act}
+      -DBUILD_FEM=#{act}
+      -DBUILD_FEM_NETGEN:BOOL=#{act}
       -DBUILD_WEB=#{act}
+      -DBUILD_PATH=#{act}
       -DFREECAD_USE_EXTERNAL_KDL=ON
       -DCMAKE_BUILD_TYPE=#{build.with?("debug") ? "Debug" : "Release"}
     ]

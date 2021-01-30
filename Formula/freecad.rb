@@ -69,7 +69,7 @@ class Freecad < Formula
     args = std_cmake_args + %W[
       -DBUILD_QT5=ON
       -DUSE_PYTHON3=1
-      -DPYTHON_EXECUTABLE=/usr/local/opt/python3.9/bin/python3
+      -DPYTHON_EXECUTABLE=#{HOMEBREW_PREFIX}/opt/python3.9/bin/python3
       -std=c++14
       -DCMAKE_CXX_STANDARD=14
       -DBUILD_ENABLE_CXX_STD:STRING=C++14
@@ -103,8 +103,8 @@ class Freecad < Formula
     system "pip3", "install", "six" unless File.exist?("#{HOMEBREW_PREFIX}/lib/python3.9/site-packages/six.py")
     bin.install_symlink "../MacOS/FreeCAD" => "FreeCAD"
     bin.install_symlink "../MacOS/FreeCADCmd" => "FreeCADCmd"
-    if !File.exist?("/usr/local/Cellar/freecad/0.19pre/lib/python3.9/site-packages/homebrew-freecad-bundle.pth")
-      (lib/"python3.9/site-packages/homebrew-freecad-bundle.pth").write "#{prefix}/MacOS/\n"
+    if !File.exist?("#{HOMEBREW_PREFIX}/Cellar/freecad/0.19pre/lib/python3.9/site-packages/homebrew-freecad-bundle.pth")
+      (lib/"python3.9/site-packages/homebrew-freecad-bundle.pth").write "#{prefix}/MacOS/\n" 
     end
   end
 

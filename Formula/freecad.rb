@@ -26,9 +26,9 @@ class Freecad < Formula
   depends_on "#@tap/coin@4.0.0"
   depends_on "#@tap/matplotlib"
   depends_on "#@tap/med-file"
+  depends_on "#@tap/nglib"
   # Temporarily fixes for Apple Silicon
   unless Hardware::CPU.arm?
-    depends_on "#@tap/nglib"
     depends_on "#@tap/opencamlib"
   end
   depends_on "#@tap/pivy"

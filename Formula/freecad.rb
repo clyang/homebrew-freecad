@@ -73,9 +73,9 @@ class Freecad < Formula
       -std=c++14
       -DCMAKE_CXX_STANDARD=14
       -DBUILD_ENABLE_CXX_STD:STRING=C++14
-      -DBUILD_FEM_NETGEN=#{act}
-      -DBUILD_FEM=#{act}
-      -DBUILD_FEM_NETGEN:BOOL=#{act}
+      -DBUILD_FEM_NETGEN=ON
+      -DBUILD_FEM=ON
+      -DBUILD_FEM_NETGEN:BOOL=ON
       -DBUILD_WEB=#{act}
       -DBUILD_PATH=#{act}
       -DFREECAD_USE_EXTERNAL_KDL=ON

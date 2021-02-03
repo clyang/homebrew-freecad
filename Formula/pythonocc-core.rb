@@ -10,7 +10,7 @@ class PythonoccCore < Formula
 
   def install
     mkdir "Build" do
-     system "cmake", '-DOCE_LIB_PATH="' + Formula["#@tap/opencascade@7.5.0"].lib, '-DOCE_INCLUDE_PATH="' + Formula["#@tap/opencascade@7.5.0"].include, *std_cmake_args , ".."
+     system "cmake", '-DOCE_LIB_PATH"' + Formula["#@tap/opencascade@7.5.0"].lib, '-DOCE_INCLUDE_PATH=' + Formula["#@tap/opencascade@7.5.0"].include + '/opencascade', *std_cmake_args , ".."
      system "make", "-j#{ENV.make_jobs}"
      system "make", "install"
     end

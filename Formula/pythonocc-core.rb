@@ -1,4 +1,4 @@
-class PythonOCCCore < Formula
+class PythonoccCore < Formula
   desc "Pythonocc provides 3D modeling and dataexchange features. It is intended to CAD/PDM/PLM and BIM related development."
   homepage "https://www.pythonocc.org"
   url "https://github.com/tpaviot/pythonocc-core.git", :using => :git

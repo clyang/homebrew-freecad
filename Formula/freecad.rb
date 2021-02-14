@@ -27,10 +27,7 @@ class Freecad < Formula
   depends_on "#@tap/matplotlib"
   depends_on "#@tap/med-file"
   depends_on "#@tap/nglib"
-  # Temporarily fixes for Apple Silicon
-  unless Hardware::CPU.arm?
-    depends_on "#@tap/opencamlib"
-  end
+  depends_on "#@tap/opencamlib"
   depends_on "#@tap/pivy"
   depends_on "#@tap/pyside2"
   depends_on "#@tap/pyside2-tools"
@@ -77,7 +74,7 @@ class Freecad < Formula
       -DBUILD_FEM=ON
       -DBUILD_FEM_NETGEN:BOOL=ON
       -DBUILD_WEB=#{act}
-      -DBUILD_PATH=#{act}
+      -DBUILD_PATH=ON
       -DFREECAD_USE_EXTERNAL_KDL=ON
       -DCMAKE_BUILD_TYPE=#{build.with?("debug") ? "Debug" : "Release"}
     ]

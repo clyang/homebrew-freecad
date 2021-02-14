@@ -1,13 +1,20 @@
 class Opencamlib < Formula
   desc "Computer Aided Manufacturing libraries"
   homepage "http://www.anderswallin.net/CAM/"
-  url "https://github.com/aewallin/opencamlib.git", :using => :git, :revision => "c3f3555270024104c51b27c33ecc7a293aae5dff"
   version "0.0.1" # TODO Specify a real version here - note usage below
-  head "https://github.com/aewallin/opencamlib.git", :using => :git, :revision => "c3f3555270024104c51b27c33ecc7a293aae5dff"
+ 
+  head do
+    url "https://github.com/aewallin/opencamlib.git"
+  end
 
-  patch :p0 do
-    url "https://raw.githubusercontent.com/vejmarie/patches/master/OpenCAMlib/fix_mac.patch"
-    sha256 "e49a5a9ab1698019c53656f3ca6625db1b40012147998fd9b35f467917897295"
+  stable do
+    url "https://github.com/aewallin/opencamlib.git",
+        revision: "c3f3555270024104c51b27c33ecc7a293aae5dff"
+
+    patch :p0 do
+      url "https://raw.githubusercontent.com/vejmarie/patches/f665f103e1e9d09eb080bfb9cddf36710891761d/OpenCAMlib/fix_mac.patch"
+      sha256 "e49a5a9ab1698019c53656f3ca6625db1b40012147998fd9b35f467917897295"
+    end
   end
 
   depends_on "#@tap/python3.9" => :build

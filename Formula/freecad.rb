@@ -17,6 +17,7 @@ class Freecad < Formula
   option "with-packaging-utils", "Optionally install packaging dependencies"
   option "with-cloud", "Build with CLOUD module"
   option "with-unsecured-cloud", "Build with self signed certificate support CLOUD module"
+  option "with-skip-web", "Disable web"
 
   depends_on "ccache" => :build
   depends_on "cmake" => :build
@@ -62,6 +63,7 @@ class Freecad < Formula
 
     # Disable function which are not available for Apple Silicon
     act = Hardware::CPU.arm? ? 'OFF' : 'ON'
+    web = build.with? "skip-web" ? 'OFF' : act
 
     args = std_cmake_args + %W[
       -DBUILD_QT5=ON
@@ -73,7 +75,7 @@ class Freecad < Formula
       -DBUILD_FEM_NETGEN=ON
       -DBUILD_FEM=ON
       -DBUILD_FEM_NETGEN:BOOL=ON
-      -DBUILD_WEB=#{act}
+      -DBUILD_WEB=#{web}
       -DBUILD_PATH=ON
       -DFREECAD_USE_EXTERNAL_KDL=ON
       -DCMAKE_BUILD_TYPE=#{build.with?("debug") ? "Debug" : "Release"}

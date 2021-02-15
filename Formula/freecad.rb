@@ -88,6 +88,10 @@ class Freecad < Formula
     args << "-DALLOW_SELF_SIGNED_CERTIFICATE=1" if build.with? "unsecured-cloud"
 
     system "node", "install", "-g", "app_dmg" if build.with? "packaging-utils"
+    
+    if build.with? "macos-app"
+      inreplace 'src/MacAppBundle/CMakeLists.txt', '${WEBKIT_FRAMEWORK_DIR}', "#{HOMEBREW_PREFIX}/opt/llvm/lib/ #{HOMEBREW_PREFIX}/opt/nglib/Contents/MacOS/ ${WEBKIT_FRAMEWORK_DIR}"
+    end
 
     mkdir "Build" do
       system "cmake", *args, ".."

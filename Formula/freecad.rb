@@ -63,7 +63,7 @@ class Freecad < Formula
 
     # Disable function which are not available for Apple Silicon
     act = Hardware::CPU.arm? ? 'OFF' : 'ON'
-    web = build.with? "skip-web" ? 'OFF' : act
+    web = build.with?("skip-web") ? 'OFF' : act
 
     args = std_cmake_args + %W[
       -DBUILD_QT5=ON

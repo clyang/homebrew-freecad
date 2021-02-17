@@ -101,11 +101,17 @@ class Freecad < Formula
   end
 
   def post_install
+    
+    # dependency, is this the homebrew way?
     system "pip3", "install", "six" unless File.exist?("#{HOMEBREW_PREFIX}/lib/python3.9/site-packages/six.py")
-    bin.install_symlink "../MacOS/FreeCAD" => "FreeCAD"
-    bin.install_symlink "../MacOS/FreeCADCmd" => "FreeCADCmd"
-    if !File.exist?("#{HOMEBREW_PREFIX}/Cellar/freecad/0.19pre/lib/python3.9/site-packages/homebrew-freecad-bundle.pth")
-      (lib/"python3.9/site-packages/homebrew-freecad-bundle.pth").write "#{prefix}/MacOS/\n" 
+    
+    # There are three different situations, install with oder without FREECAD_CREATE_MAC_APP=1 or get the bottle
+    bin.install_symlink "FreeCAD.app/Contens/MacOS/FreeCAD" => "FreeCAD"
+    bin.install_symlink "FreeCAD.app/Contens/FreeCADCmd" => "FreeCADCmd"
+    
+    # What's the point of this file?
+    if !File.exist?("#{prefix}/lib/python3.9/site-packages/homebrew-freecad-bundle.pth")
+      (lib/"python3.9/site-packages/homebrew-freecad-bundle.pth").write "#{prefix}/FreeCAD.app/Contens/MacOS/\n"
     end
   end
 

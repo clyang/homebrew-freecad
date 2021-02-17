@@ -106,12 +106,12 @@ class Freecad < Formula
     system "pip3", "install", "six" unless File.exist?("#{HOMEBREW_PREFIX}/lib/python3.9/site-packages/six.py")
     
     # There are three different situations, install with oder without FREECAD_CREATE_MAC_APP=1 or get the bottle
-    bin.install_symlink "FreeCAD.app/Contens/MacOS/FreeCAD" => "FreeCAD"
-    bin.install_symlink "FreeCAD.app/Contens/FreeCADCmd" => "FreeCADCmd"
+    bin.install_symlink "#{prefix}/FreeCAD.app/Contents/MacOS/FreeCAD" => "FreeCAD"
+    bin.install_symlink "#{prefix}/FreeCAD.app/Contents/FreeCADCmd" => "FreeCADCmd"
     
     # What's the point of this file?
     if !File.exist?("#{prefix}/lib/python3.9/site-packages/homebrew-freecad-bundle.pth")
-      (lib/"python3.9/site-packages/homebrew-freecad-bundle.pth").write "#{prefix}/FreeCAD.app/Contens/MacOS/\n"
+      (lib/"python3.9/site-packages/homebrew-freecad-bundle.pth").write "#{prefix}/FreeCAD.app/Contents/MacOS/\n"
     end
   end
 

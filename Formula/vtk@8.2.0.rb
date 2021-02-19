@@ -25,19 +25,19 @@ class VtkAT820 < Formula
   # Fix compile issues on Mojave and later
   patch do
     url "https://gitlab.kitware.com/vtk/vtk/commit/ca3b5a50d945b6e65f0e764b3138cad17bd7eb8d.patch"
-    sha256 "4e59d1b8b2c672ae571966f3f7ce8d0c66dd3844d6eb3727012dd98c9e897a25"
+    sha256 "49574bb914e2564b21ab0fb23cadcccd7dd323ae7f0f26f64fd6346c3db14cd7"
   end
 
   # Python 3.8 compatibility
   patch do
     url "https://gitlab.kitware.com/vtk/vtk/commit/257b9d7b18d5f3db3fe099dc18f230e23f7dfbab.patch"
-    sha256 "d5eef4a022d7d18087c9267c632c79bd6ef312fc6a287aeacfc44e9d47a5ec91"
+    sha256 "41914057adc511527167b812f9604f1ff0aed74e12dc20c98bbc5c52ccab9cda"
   end
 
   # Qt 5.15 support
   patch do
     url "https://gitlab.kitware.com/vtk/vtk/-/commit/797f28697d5ba50c1fa2bc5596af626a3c277826.patch"
-    sha256 "57618e316e7c3c3ade8d64c472b0ab77ebb0584d34b79c1f8dd3637d023461ff"
+    sha256 "01e870a943edea2a096c7bc9e43d2a70e10a5a80d1cd89b08868ab0f746c1c1c"
   end
 
   bottle do

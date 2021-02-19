@@ -37,7 +37,7 @@ class VtkAT820 < Formula
   # Qt 5.15 support
   patch do
     url "https://gitlab.kitware.com/vtk/vtk/-/commit/797f28697d5ba50c1fa2bc5596af626a3c277826.patch"
-    sha256 "57618e316e7c3c3ade8d64c472b0ab77ebb0584d34b79c1f8dd3637d023461ff"
+    sha256 "01e870a943edea2a096c7bc9e43d2a70e10a5a80d1cd89b08868ab0f746c1c1c"
   end
 
   bottle do

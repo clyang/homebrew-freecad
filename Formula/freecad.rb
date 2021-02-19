@@ -42,7 +42,7 @@ class Freecad < Formula
   depends_on "pkg-config"
   depends_on "#@tap/python3.9"
   depends_on "#@tap/qt5152"
-  depends_on "#@tap/vtk@8.2.0"
+  depends_on "#@tap/vtk@9.0.1"
   depends_on "webp"
   depends_on "xerces-c"
 

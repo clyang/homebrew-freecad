@@ -63,6 +63,8 @@ class Freecad < Formula
     
     if build.with?('debug') 
       args = std_cmake_args.map{ |v| v == '-DCMAKE_BUILD_TYPE=Release' ? '-DCMAKE_BUILD_TYPE=Debug' : v } 
+    else
+      args = std_cmake_args
     end
 
     # Disable function which are not available for Apple Silicon

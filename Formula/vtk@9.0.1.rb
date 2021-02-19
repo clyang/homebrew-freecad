@@ -46,6 +46,7 @@ class VtkAT901 < Formula
     # Do not record compiler path because it references the shim directory
     inreplace "Common/Core/vtkConfigure.h.in", "@CMAKE_CXX_COMPILER@", "clang++"
 
+    pyver = Language::Python.major_minor_version "python3"
     args = std_cmake_args + %W[
       -DBUILD_SHARED_LIBS:BOOL=ON
       -DBUILD_TESTING:BOOL=OFF

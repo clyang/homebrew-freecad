@@ -78,8 +78,12 @@ class VtkAT901 < Formula
       -DVTK_MODULE_USE_EXTERNAL_VTK_tiff:BOOL=ON
       -DVTK_MODULE_USE_EXTERNAL_VTK_utf8:BOOL=ON
       -DVTK_MODULE_USE_EXTERNAL_VTK_zlib:BOOL=ON
-      -DPython3_EXECUTABLE:FILEPATH=#{Formula["python@3.9"].opt_bin}/python3
+      -DPython3_EXECUTABLE:FILEPATH=#{Formula["#@tap/python@3.9"].opt_bin}/python3
       -DVTK_GROUP_ENABLE_Qt:STRING=YES
+      -DVTK_INSTALL_PYTHON_MODULE_DIR=#{lib}/python#{pyver}/site-packages
+      -DVTK_QT_VERSION:STRING=5
+      -DVTK_WRAP_PYTHON_SIP=ON
+      -DSIP_PYQT_DIR='#{Formula["#@tap/pyqt@5.15.2"].opt_share}/sip'
     ]
 
     mkdir "build" do

@@ -60,12 +60,14 @@ class Freecad < Formula
       ENV["CC"] = Formula["llvm"].opt_bin/"clang"
       ENV["CXX"] = Formula["llvm"].opt_bin/"clang++"
     end
+    
+    if build.with?('debug') 
+      args = std_cmake_args.map{ |v| v == '-DCMAKE_BUILD_TYPE=Release' ? '-DCMAKE_BUILD_TYPE=Debug' : v } 
+    end
 
     # Disable function which are not available for Apple Silicon
     act = Hardware::CPU.arm? ? 'OFF' : 'ON'
     web = build.with?("skip-web") ? 'OFF' : act
-    
-    args = std_cmake_args.map{ |v| v == '-DCMAKE_BUILD_TYPE=Release' ? '-DCMAKE_BUILD_TYPE=Debug' : v } if build.with?('debug') 
     
     args = args + %W[
       -DBUILD_QT5=ON

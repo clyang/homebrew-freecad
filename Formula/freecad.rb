@@ -65,8 +65,8 @@ class Freecad < Formula
     act = Hardware::CPU.arm? ? 'OFF' : 'ON'
     web = build.with?("skip-web") ? 'OFF' : act
     
-    std_cmake_args['-DCMAKE_BUILD_TYPE=Release'] = '-DCMAKE_BUILD_TYPE=Debug' if build.with?('debug')
-
+    std_cmake_args = std_cmake_args.map{ |v| v == '-DCMAKE_BUILD_TYPE=Release' ? '-DCMAKE_BUILD_TYPE=Debug' : v }
+    
     args = std_cmake_args + %W[
       -DBUILD_QT5=ON
       -DUSE_PYTHON3=1

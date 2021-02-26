@@ -8,10 +8,11 @@ class Smesh < Formula
 
   def install
     
-    system "python prepare.py"
+    system "#{Formula["#@tap/python3.9"].opt_bin}/pip3 install patch"
+    system "#{Formula["#@tap/python3.9"].opt_bin}/python3 prepare.py"
     
     mkdir "Build" do
-     system "cmake",  *args , ".."
+     system "cmake",  std_cmake_args , ".."
      system "make", "-j#{ENV.make_jobs}"
      system "make", "install"
     end

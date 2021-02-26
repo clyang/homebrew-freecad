@@ -8,7 +8,7 @@ class Smesh < Formula
 
   def install
     
-    sytsem "python prepare.py"
+    system "python prepare.py"
     
     mkdir "Build" do
      system "cmake",  *args , ".."

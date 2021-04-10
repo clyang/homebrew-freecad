@@ -4,18 +4,17 @@ class VtkAT901 < Formula
   url "https://www.vtk.org/files/release/9.0/VTK-9.0.1.tar.gz"
   sha256 "1b39a5e191c282861e7af4101eaa8585969a2de05f5646c9199a161213a622c7"
   license "BSD-3-Clause"
-  revision 3
+  revision 6
   head "https://github.com/Kitware/VTK.git"
+  
+#  bottle do
+#    sha256 arm64_big_sur: "d1c560768281726c996c3a2dd76202f6b196af6d0631f87d484e2e6e12ae56e1"
+#    sha256 big_sur:       "44a9497ff797186c2eb8f5291fed5973bf53a3ba918a019e35979ffb55670863"
+#    sha256 catalina:      "739839d52d811ca3d6c7b604ca7d915071d3d60a1bd3093f8d6a17ea6d1a6939"
+#    sha256 mojave:        "23078179981c75dee132e37e2fabafd7bc7a073d0e88f202045127bbdb8df9d3"
+#  end
 
-  bottle do
-    rebuild 1
-    sha256 arm64_big_sur: "e6f3c3eed81540d13324e11c69dffd1e1bb4125adab4bfb887b751b4eeef53c1"
-    sha256 big_sur:       "61c252de19459e69ba40d309e7ecbb76d2344da49ca4cd1b4e9001e8ad0648bf"
-    sha256 catalina:      "e86b086258803d2976412041b9e63cedad4b3f6370487a26cddd2f0aaa771677"
-    sha256 mojave:        "74398387250003929ee4df43e584a36d54e0b59fb9024446fd24156d809a5167"
-  end
-
-  depends_on "cmake" => :build
+  depends_on "cmake" => [:build, :test]
   depends_on "#@tap/boost@1.75.0"
   depends_on "double-conversion"
   depends_on "eigen"

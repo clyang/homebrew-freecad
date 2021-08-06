@@ -10,13 +10,15 @@ class Elmer < Formula
       revision: "c40a03f2d0c77fa66afa7a476e8981fa8b7d74ac"
     version "v10pre"
   end
+  
+  @@vtk = build.with? 'vtk9' ? "#{@tap}/vtk@9.0.3" : "#{@tap}/vtk@8.2.0" 
 
   depends_on "cmake" => :build
   depends_on "freecad/freecad/opencascade@7.5.0"
   depends_on "freecad/freecad/python3.9"
   depends_on "freecad/freecad/qt5152"
   depends_on "freecad/freecad/qwtelmer"
-  depends_on "freecad/freecad/vtk@8.2.0"
+  depends_on @@vtk
   depends_on "gcc"
   depends_on macos: :high_sierra # no access to sierra test box
   depends_on "open-mpi"
@@ -34,7 +36,7 @@ class Elmer < Formula
 
     args << "-DQWT_INCLUDE_DIR:STRING="+Formula["freecad/freecad/qwtelmer"].opt_prefix+"/lib/qwt.framework/Versions/Current/Headers/"
     args << "-DQWT_LIBRARY:STRING="+Formula["freecad/freecad/qwtelmer"].opt_prefix+"/lib/qwt.framework/Versions/Current/qwt"
-    args << '-DCMAKE_PREFIX_PATH="' + Formula["freecad/freecad/qt5152"].opt_prefix + "/lib/cmake;" + Formula["freecad/freecad/vtk@8.2.0"].opt_prefix + "/lib/cmake;" + Formula["freecad/freecad/opencascade@7.5.0"].opt_prefix + "/lib/cmake;"+ '" -DCMAKE_C_FLAGS="-F' + Formula["freecad/freecad/qwtelmer"].opt_prefix+"/lib/" + ' -framework qwt"'
+    args << '-DCMAKE_PREFIX_PATH="' + Formula["freecad/freecad/qt5152"].opt_prefix + "/lib/cmake;" + Formula[@@vtk].opt_prefix + "/lib/cmake;" + Formula["freecad/freecad/opencascade@7.5.0"].opt_prefix + "/lib/cmake;"+ '" -DCMAKE_C_FLAGS="-F' + Formula["freecad/freecad/qwtelmer"].opt_prefix+"/lib/" + ' -framework qwt"'
 
     mkdir "Build" do
       system "cmake", *args, ".."

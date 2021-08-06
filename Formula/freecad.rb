@@ -22,7 +22,10 @@ class Freecad < Formula
   option "with-cloud", "Build with CLOUD module"
   option "with-unsecured-cloud", "Build with self signed certificate support CLOUD module"
   option "with-skip-web", "Disable web"
-
+  option "with-vtk9", "Use the vtk9 toolkit."
+  
+  @@vtk = build.with? 'vtk9' ? "#{@tap}/vtk@9.0.3" : "#{@tap}/vtk@8.2.0" 
+  
   depends_on "ccache" => :build
   depends_on "cmake" => :build
   depends_on "#{@tap}/swig@4.0.2" => :build
@@ -46,7 +49,7 @@ class Freecad < Formula
   depends_on "pkg-config"
   depends_on "#{@tap}/python3.9"
   depends_on "#{@tap}/qt5152"
-  depends_on "#{@tap}/vtk@8.2.0"
+  depends_on @@vtk
   depends_on "webp"
   depends_on "xerces-c"
 
@@ -79,7 +82,7 @@ class Freecad < Formula
     prefix_paths = ''
     prefix_paths << Formula["#{@tap}/qt5152"].lib/'cmake;'
     prefix_paths << Formula["#{@tap}/nglib"].opt_prefix/'Contents/Resources;'
-    prefix_paths << Formula["#{@tap}/vtk@8.2.0"].lib/'cmake;'
+    prefix_paths << Formula[@@vtk].lib/'cmake;'
     prefix_paths << Formula["#{@tap}/opencascade@7.5.0"].lib/'cmake;'
     prefix_paths << Formula["#{@tap}/med-file"].share/'cmake;'
     prefix_paths << Formula["#{@tap}/shiboken2"].lib/'cmake;'

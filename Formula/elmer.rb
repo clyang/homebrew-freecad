@@ -13,6 +13,11 @@ class Elmer < Formula
   
   @@vtk = build.with? 'vtk9' ? "#{@tap}/vtk@9.0.3" : "#{@tap}/vtk@8.2.0" 
 
+  bottle do
+    root_url "https://github.com/freecad/homebrew-freecad/releases/download/07.28.2021"
+  end
+
+
   depends_on "cmake" => :build
   depends_on "freecad/freecad/opencascade@7.5.0"
   depends_on "freecad/freecad/python3.9"

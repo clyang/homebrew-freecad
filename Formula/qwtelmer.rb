@@ -6,7 +6,7 @@ class Qwtelmer < Formula
   license "LGPL-2.1-only" => { with: "Qwt-exception-1.0" }
   revision 1
 
-  depends_on "#{@tap}/qt5152"
+  depends_on "./qt5152"
 
   # Update designer plugin linking back to qwt framework/lib after install
   # See: https://sourceforge.net/p/qwt/patches/45/
@@ -30,7 +30,7 @@ class Qwtelmer < Formula
     spec << "-arm64" if Hardware::CPU.arm?
     args << spec
 
-    qt5 = Formula["#{@tap}/qt5152"].opt_prefix
+    qt5 = Formula["./qt5152"].opt_prefix
     system "#{qt5}/bin/qmake", *args
     system "make"
     system "make", "install"
@@ -49,8 +49,8 @@ class Qwtelmer < Formula
       "-framework", "qwt", "-framework", "QtCore",
       "-F#{lib}", "-F#{Formula["#{@tap}/qt5152"].opt_lib}",
       "-I#{lib}/qwt.framework/Headers",
-      "-I#{Formula["#{@tap}/qt5152"].opt_lib}/QtCore.framework/Versions/5/Headers",
-      "-I#{Formula["#{@tap}/qt5152"].opt_lib}/QtGui.framework/Versions/5/Headers"
+      "-I#{Formula["./qt5152"].opt_lib}/QtCore.framework/Versions/5/Headers",
+      "-I#{Formula["./qt5152"].opt_lib}/QtGui.framework/Versions/5/Headers"
     system "./out"
   end
 end

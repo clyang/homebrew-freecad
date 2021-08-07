@@ -21,10 +21,10 @@ class Elmer < Formula
 
 
   depends_on "cmake" => :build
-  depends_on "freecad/freecad/opencascade@7.5.0"
-  depends_on "freecad/freecad/python3.9"
-  depends_on "freecad/freecad/qt5152"
-  depends_on "freecad/freecad/qwtelmer"
+  depends_on "./opencascade@7.5.0"
+  depends_on "./python3.9"
+  depends_on "./qt5152"
+  depends_on "./qwtelmer"
   depends_on @@vtk
   depends_on "gcc"
   depends_on macos: :high_sierra # no access to sierra test box
@@ -41,10 +41,16 @@ class Elmer < Formula
       -DWITH_QT5:BOOLEAN=TRUE
     ]
 
-    args << "-DQWT_INCLUDE_DIR:STRING="+Formula["freecad/freecad/qwtelmer"].opt_prefix+"/lib/qwt.framework/Versions/Current/Headers/"
-    args << "-DQWT_LIBRARY:STRING="+Formula["freecad/freecad/qwtelmer"].opt_prefix+"/lib/qwt.framework/Versions/Current/qwt"
-    args << '-DCMAKE_PREFIX_PATH="' + Formula["freecad/freecad/qt5152"].opt_prefix + "/lib/cmake;" + Formula[@@vtk].opt_prefix + "/lib/cmake;" + Formula["freecad/freecad/opencascade@7.5.0"].opt_prefix + "/lib/cmake;"+ '" -DCMAKE_C_FLAGS="-F' + Formula["freecad/freecad/qwtelmer"].opt_prefix+"/lib/" + ' -framework qwt"'
-
+    prefix_paths = ""
+    { './qt5152'            => 'cmake',
+      @@vtk                 => 'cmake',
+      './opencascade@7.5.0' => 'cmake  -DCMAKE_C_FLAGS="-F',
+      './qwtelmer'          => '/  -framework qwt"',
+    }.each {|f,l| prefix_paths << Formula[f].lib/l  }
+    args << "-DQWT_INCLUDE_DIR:STRING="+Formula["./qwtelmer"].lib/"qwt.framework/Versions/Current/Headers/"
+    args << "-DQWT_LIBRARY:STRING="+Formula["./qwtelmer"].lib/"qwt.framework/Versions/Current/qwt"
+    args << "-DCMAKE_PREFIX_PATH=\"#{prefix_paths}"
+    
     mkdir "Build" do
       system "cmake", *args, ".."
       system "make", "-j#{ENV.make_jobs}", "install"

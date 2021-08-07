@@ -4,8 +4,7 @@ class OpencascadeAT750 < Formula
   url "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=refs/tags/V7_5_0;sf=tgz"
   version "7.5.0"
   sha256 "c8df7d23051b86064f61299a5f7af30004c115bdb479df471711bab0c7166654"
-  head "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=refs/tags/V7_5_3;sf=tgz", version: "7.5.3", sha256: "cc3d3fd9f76526502c3d9025b651f45b034187430f231414c97dda756572410b"
-
+  head "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=refs/tags/V7_5_3;sf=tgz", version: "7.5.3"
   livecheck do
     url "https://www.opencascade.com/content/latest-release"
     regex(/href=.*?opencascade[._-]v?(\d+(?:\.\d+)+)\.t/i)

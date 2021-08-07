@@ -24,7 +24,7 @@ class Freecad < Formula
   option "with-skip-web", "Disable web"
   option "with-vtk9", "Use the vtk9 toolkit."
   
-  @@vtk = build.with? 'vtk9' ? "#{@tap}/vtk@9.0.3" : "#{@tap}/vtk@8.2.0" 
+  @@vtk = build.with?('vtk9') ? "#{@tap}/vtk@9.0.3" : "#{@tap}/vtk@8.2.0" 
   
   depends_on "ccache" => :build
   depends_on "cmake" => :build

@@ -11,7 +11,9 @@ class Elmer < Formula
     version "v10pre"
   end
   
-  @@vtk = build.with? 'vtk9' ? "#{@tap}/vtk@9.0.3" : "#{@tap}/vtk@8.2.0" 
+  option 'with-vtk9', 'Use the vtk9 toolkit.'
+  
+  @@vtk = build.with?('vtk9') ? './vtk@9.0.3' : './vtk@8.2.0' 
 
   bottle do
     root_url "https://github.com/freecad/homebrew-freecad/releases/download/07.28.2021"

@@ -72,7 +72,7 @@ class BoostPython3AT1780 < Formula
 
      lib.install Dir["install-python3/lib/*.*"]
      (lib/"cmake").install Dir["install-python3/lib/cmake/boost_python*"]
-     (lib/"cmake").install Dir["install-python3/lib/cmake/boost_numpy*"]
+    #  (lib/"cmake").install Dir["install-python3/lib/cmake/boost_numpy*"]
      doc.install Dir["libs/python/doc/*"]
    end
 

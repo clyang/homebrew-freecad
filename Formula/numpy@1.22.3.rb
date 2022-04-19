@@ -6,7 +6,7 @@ class NumpyAT1223 < Formula
   license "BSD-3-Clause"
   head "https://github.com/numpy/numpy.git", branch: "main"
 
-  depends_on "./cython@0.29.28" => :build
+  # depends_on "./cython@0.29.28" => :build
   depends_on "gcc" => :build # for gfortran
   depends_on "openblas"
   depends_on "./python@3.10.2"
@@ -28,7 +28,7 @@ class NumpyAT1223 < Formula
     Pathname("site.cfg").write config
     py = Formula["./python@3.10.2"]
     version = Language::Python.major_minor_version py.opt_bin/"python3"
-    ENV.prepend_create_path "PYTHONPATH", Formula["./cython@0.29.28"].opt_libexec/"lib/python#{version}/site-packages:#{py.site_packages}"
+    # ENV.prepend_create_path "PYTHONPATH", Formula["./cython@0.29.28"].opt_libexec/"lib/python#{version}/site-packages:#{py.site_packages}"
     system py.opt_bin/"python3", "setup.py", "build",
         "--fcompiler=gfortran", "--parallel=#{ENV.make_jobs}"
     system py.opt_bin/"python3", *Language::Python.setup_install_args(prefix)

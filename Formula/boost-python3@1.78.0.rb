@@ -10,7 +10,7 @@ class BoostPython3AT1780 < Formula
       formula "./boost@1.7.8"
     end
 
-   depends_on "./numpy@1.22.3" => :build
+  #  depends_on "./numpy@1.22.3" => :build
    depends_on "./boost@1.78.0"
    depends_on "./python@3.10.2"
 
@@ -64,11 +64,11 @@ class BoostPython3AT1780 < Formula
                     "--prefix=install-python3",
                     "python=#{pyver}",
                     *args
-                    
+
      unless Dir.exist?(opt_prefix+'include')
        mkdir ('include')
        File.write('include/weneedit.txt', 'FreeCAD cmake need it.')
-     end 
+     end
 
      lib.install Dir["install-python3/lib/*.*"]
      (lib/"cmake").install Dir["install-python3/lib/cmake/boost_python*"]
